@@ -17,6 +17,7 @@ describe('Controller: InfoCtrl', function () {
             serviceAjax: serviceAjax
         });
     }));
+
     it('should set $scope.movie when calling $scope.infoMovie', function () {
         spyOn(serviceAjax, 'info').and.callFake(function () {
             return{
@@ -30,4 +31,22 @@ describe('Controller: InfoCtrl', function () {
 
         expect(scope.movie).toEqual({"title" : "test"});
     });
+
+  it('should set $scope.similars when calling $scope.similarMovie', function () {
+    spyOn(serviceAjax, 'similar').and.callFake(function () {
+      return{
+        success: function (callback) {
+          callback({"results": [
+            {}
+          ]})
+        }
+      }
+    });
+
+    scope.similarMovie();
+    expect(scope.similars).toEqual([
+      {}
+    ]);
+  });
+  
 });
